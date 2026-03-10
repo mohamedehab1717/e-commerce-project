@@ -1,22 +1,11 @@
-require('dotenv').config();
 const mysql = require('mysql2');
 
-// Build connection config
-const dbConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'ecommerce_db'
-};
-
-// Add SSL if DB_SSL is set to 'true' (for external MySQL services like PlanetScale)
-if (process.env.DB_SSL === 'true') {
-    dbConfig.ssl = {
-        rejectUnauthorized: false
-    };
-}
-
-const db = mysql.createConnection(dbConfig);
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',           // اسم المستخدم بتاع MySQL
+    password: '',           // الباسورد بتاع MySQL (سيبها فاضي لو على XAMPP/WAMP)
+    database: 'ecommerce_db' // اسم قاعدة البيانات
+});
 
 db.connect((err) => {
     if (err) {

@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors'); // لازم عشان حل مشكلة CORS
 const app = express();
@@ -22,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 7000;
+const PORT = 7000;
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });

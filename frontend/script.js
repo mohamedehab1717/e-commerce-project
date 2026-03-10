@@ -1,4 +1,4 @@
-const apiUrl = "/products"; // Backend
+const apiUrl = "http://localhost:7000/products"; // Backend
 let cart = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
 
         try {
-            const res = await fetch("/orders", {
+            const res = await fetch("http://localhost:7000/orders", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
