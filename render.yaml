@@ -1,0 +1,41 @@
+services:
+  # Web Service (Backend + Frontend)
+  - type: web
+    name: ecommerce-app
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        fromService:
+          type: web
+          name: ecommerce-app
+          property: port
+      - key: DB_HOST
+        fromDatabase:
+          name: ecommerce-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: ecommerce-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ecommerce-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: ecommerce-db
+          property: database
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  # MySQL Database
+  - name: ecommerce-db
+    databaseName: ecommerce_db
+    user: ecommerce_user
+    plan: free
+
