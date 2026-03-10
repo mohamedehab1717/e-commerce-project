@@ -1,10 +1,11 @@
 const express = require('express');
-const cors = require('cors'); // لازم عشان حل مشكلة CORS
+const cors = require('cors'); // لحل مشاكل CORS
+const path = require('path'); // للتعامل مع المسارات
 const app = express();
 
 // Middleware
 app.use(cors()); // يسمح لأي origin بالوصول للسيرفر
-app.use(express.json()); // عشان نقدر نقرا الـJSON من body
+app.use(express.json()); // لقراءة JSON من body
 
 // Routes
 const productsRoute = require('./routes/products');
@@ -14,14 +15,17 @@ const ordersRoute = require('./routes/orders');
 app.use('/orders', ordersRoute);
 app.use('/products', productsRoute);
 app.use('/users', usersRoute);
-app.use(express.static("frontend"));
+
+// Serve frontend files
+app.use(express.static(path.join(__dirname, 'frontend')));
+
 // Test Route
 app.get("/", (req, res) => {
-    res.send("Ecommerce Server Running");
+    res.send("✅ Ecommerce Server Running");
 });
 
 // Start Server
-const PORT = 7000;
+const PORT = process.env.PORT || 7000; // Render سيضع PORT تلقائيًا
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
