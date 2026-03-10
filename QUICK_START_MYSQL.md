@@ -2,7 +2,13 @@
 
 ## Step 1: Set Up External MySQL Database
 
-**Recommended: PlanetScale (Free)**
+**Recommended: PlanetScale (100% FREE - No Credit Card Required!)**
+
+PlanetScale's "Hobby" plan is completely free forever:
+- ✅ No credit card needed
+- ✅ No time limit
+- ✅ 1GB storage (plenty for your project)
+- ✅ Free forever
 
 1. Go to https://planetscale.com and sign up
 2. Create a new database named `ecommerce_db`
