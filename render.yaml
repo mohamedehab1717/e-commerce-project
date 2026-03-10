@@ -13,29 +13,16 @@ services:
           type: web
           name: ecommerce-app
           property: port
+      # Database credentials - Set these manually in Render dashboard
+      # Get them from your external MySQL service (PlanetScale, Railway, etc.)
       - key: DB_HOST
-        fromDatabase:
-          name: ecommerce-db
-          property: host
+        sync: false  # Set manually in dashboard
       - key: DB_USER
-        fromDatabase:
-          name: ecommerce-db
-          property: user
+        sync: false  # Set manually in dashboard
       - key: DB_PASSWORD
-        fromDatabase:
-          name: ecommerce-db
-          property: password
+        sync: false  # Set manually in dashboard
       - key: DB_NAME
-        fromDatabase:
-          name: ecommerce-db
-          property: database
+        value: ecommerce_db
       - key: JWT_SECRET
         generateValue: true
-
-databases:
-  # MySQL Database
-  - name: ecommerce-db
-    databaseName: ecommerce_db
-    user: ecommerce_user
-    plan: free
 
