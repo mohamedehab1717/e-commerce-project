@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 
 // Test Route
 app.get("/", (req, res) => {
-    res.send("✅ Ecommerce Server Running");
+    res.sendFile(path.join(__dirname, "frontend", "login.html"));
 });
 
 // Start Server
