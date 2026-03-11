@@ -15,7 +15,6 @@ app.use('/orders', ordersRoute);
 app.use('/products', productsRoute);
 app.use('/users', usersRoute);
 app.use(express.static("frontend"));
-
 // Test Route
 app.get("/", (req, res) => {
     res.send("Ecommerce Server Running");
