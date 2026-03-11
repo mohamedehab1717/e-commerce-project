@@ -23,10 +23,15 @@ app.use(express.static(frontendPath));
 
 // Default route to login page
 app.get("/", (req, res) => {
-    res.sendFile(path.join(frontendPath, 'login.html'));
+    try {
+        res.sendFile(path.join(frontendPath, 'login.html'));
+    } catch (err) {
+        console.error('Error serving login page:', err);
+        res.status(500).send('Error loading page');
+    }
 });
 
-// Catch-all for frontend routes (exclude API routes and static files)
+// Catch-all for frontend routes (must be last, before error handler)
 app.get("*", (req, res) => {
     // Skip API routes - they should have been handled above
     if (req.path.startsWith('/users') || 
@@ -38,11 +43,12 @@ app.get("*", (req, res) => {
     try {
         res.sendFile(path.join(frontendPath, 'login.html'));
     } catch (err) {
+        console.error('Error serving page:', err);
         res.status(500).send('Error loading page');
     }
 });
 
-// Error handling middleware
+// Error handling middleware (must be last)
 app.use((err, req, res, next) => {
     console.error('Error:', err);
     res.status(500).json({ error: 'Internal server error' });
@@ -50,10 +56,13 @@ app.use((err, req, res, next) => {
 
 // Start Server
 const PORT = process.env.PORT || 7000;
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-}).on('error', (err) => {
-    console.error('Failed to start server:', err);
+
+try {
+    app.listen(PORT, () => {
+        console.log(`✅ Server started successfully on port ${PORT}`);
+        console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+} catch (error) {
+    console.error('❌ Failed to start server:', error);
     process.exit(1);
-});
+}
