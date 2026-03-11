@@ -17,11 +17,10 @@ app.use('/orders', ordersRoute);
 app.use('/products', productsRoute);
 app.use('/users', usersRoute);
 
-// Serve frontend static files
+// Frontend path
 const frontendPath = path.join(__dirname, 'frontend');
-app.use(express.static(frontendPath));
 
-// Default route to login page
+// Default route to login page (MUST come before express.static)
 app.get("/", (req, res) => {
     try {
         res.sendFile(path.join(frontendPath, 'login.html'));
@@ -30,6 +29,9 @@ app.get("/", (req, res) => {
         res.status(500).send('Error loading page');
     }
 });
+
+// Serve frontend static files (after the root route)
+app.use(express.static(frontendPath));
 
 // Catch-all for frontend routes (must be last, before error handler)
 app.get("*", (req, res) => {
