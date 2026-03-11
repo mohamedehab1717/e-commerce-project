@@ -1,5 +1,11 @@
-require('dotenv').config();
-const db = require('./config/db');
+const mysql = require('mysql2');
+
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'ecommerce_db'
+});
 
 const products = [
     {
@@ -74,19 +80,27 @@ const products = [
     }
 ];
 
-async function seedProducts() {
-    try {
-        for (const p of products) {
-            await db.query(
-                `INSERT INTO products (name, description, price, image_url, stock) VALUES ($1, $2, $3, $4, $5)`,
-                [p.name, p.description, p.price, p.image, p.stock]
-            );
-        }
-        console.log(`✅ Successfully inserted ${products.length} products.`);
+db.connect((err) => {
+    if (err) throw err;
+    console.log('Connected to MySQL server.');
+
+    products.forEach((p) => {
+        db.query(
+            'INSERT INTO products (name, description, price, image, stock) VALUES (?, ?, ?, ?, ?)',
+            [p.name, p.description, p.price, p.image, p.stock],
+            (err, result) => {
+                if (err) {
+                    console.error('Error inserting product:', err);
+                } else {
+                    console.log(`Inserted: ${p.name}`);
+                }
+            }
+        );
+    });
+
+    setTimeout(() => {
+        console.log('Seeding completed!');
+        db.end();
         process.exit(0);
-    } catch (err) {
-        console.error('⚠️ Error inserting products:', err);
-        process.exit(1);
-    }
-}
-seedProducts();
+    }, 2000);
+});

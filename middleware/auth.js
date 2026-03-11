@@ -1,6 +1,5 @@
-require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = process.env.JWT_SECRET || "YOUR_SECRET_KEY"; // نفس اللي استخدمناه في login
+const SECRET_KEY = "YOUR_SECRET_KEY"; // نفس اللي استخدمناه في login
 
 // Middleware للتحقق من التوكن
 function authenticateToken(req, res, next){
