@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors'); // لحل مشاكل CORS
-const path = require('path'); // للتعامل مع المسارات
+const cors = require('cors');
+const path = require('path');
 const app = express();
 
 // Middleware
-app.use(cors()); // يسمح لأي origin بالوصول للسيرفر
-app.use(express.json()); // لقراءة JSON من body
+app.use(cors());
+app.use(express.json());
 
 // Routes
 const productsRoute = require('./routes/products');
@@ -16,12 +17,25 @@ app.use('/orders', ordersRoute);
 app.use('/products', productsRoute);
 app.use('/users', usersRoute);
 
-// Serve frontend files
-app.use(express.static(path.join(__dirname, 'frontend')));
+// Serve frontend static files
+const frontendPath = path.join(__dirname, 'frontend');
+app.use(express.static(frontendPath));
 
-// Test Route
+// Default route to login page
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "login.html"));
+    res.sendFile(path.join(frontendPath, 'login.html'));
+});
+
+// Catch-all for frontend routes (exclude API routes)
+app.get("*", (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/users') || 
+        req.path.startsWith('/products') || 
+        req.path.startsWith('/orders')) {
+        return next();
+    }
+    // Serve frontend HTML files
+    res.sendFile(path.join(frontendPath, 'login.html'));
 });
 
 // Start Server

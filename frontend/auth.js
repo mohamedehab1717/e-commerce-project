@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:7000/users";
+const apiUrl = "/users";
 
 document.addEventListener("DOMContentLoaded", () => {
 
