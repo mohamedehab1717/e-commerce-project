@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const db = require('../config/db'); // تأكد انك عامل ملف db.js للاتصال بالـMySQL
@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // Secret key للـJWT
-const JWT_SECRET = "YOUR_SECRET_KEY"; // ممكن تغيّرها لأي حاجة قوية
+const JWT_SECRET = process.env.JWT_SECRET || "YOUR_SECRET_KEY"; // ممكن تغيّرها لأي حاجة قوية
 
 // ------------------ Register ------------------
 router.post('/register', async (req, res) => {

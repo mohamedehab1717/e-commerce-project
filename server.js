@@ -26,16 +26,20 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(frontendPath, 'login.html'));
 });
 
-// Catch-all for frontend routes (exclude API routes)
-app.get("*", (req, res, next) => {
-    // Skip API routes
+// Catch-all for frontend routes (exclude API routes and static files)
+app.get("*", (req, res) => {
+    // Skip API routes - they should have been handled above
     if (req.path.startsWith('/users') || 
         req.path.startsWith('/products') || 
         req.path.startsWith('/orders')) {
-        return next();
+        return res.status(404).json({ error: 'Route not found' });
     }
     // Serve frontend HTML files
-    res.sendFile(path.join(frontendPath, 'login.html'));
+    try {
+        res.sendFile(path.join(frontendPath, 'login.html'));
+    } catch (err) {
+        res.status(500).send('Error loading page');
+    }
 });
 
 // Start Server
