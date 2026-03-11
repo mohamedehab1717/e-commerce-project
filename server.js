@@ -42,8 +42,18 @@ app.get("*", (req, res) => {
     }
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+});
+
 // Start Server
-const PORT = process.env.PORT || 7000; // Render سيضع PORT تلقائيًا
+const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+}).on('error', (err) => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
 });
