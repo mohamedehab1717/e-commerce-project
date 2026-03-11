@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:7000/products";
+const apiUrl = "/products";
 let token = localStorage.getItem('token');
 
 document.addEventListener('DOMContentLoaded', () => {
