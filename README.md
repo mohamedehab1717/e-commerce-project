@@ -87,4 +87,4 @@ Passwords are securely hashed using bcrypt before storing in the database.
 <img width="1897" height="906" alt="submit page" src="https://github.com/user-attachments/assets/3552965f-0cf4-4391-a7eb-406f5e02867a" />
 <img width="1897" height="900" alt="admin add product" src="https://github.com/user-attachments/assets/4b96e048-9fff-4057-981f-fa7c8e14e914" />
 <img width="1898" height="907" alt="admin adds product" src="https://github.com/user-attachments/assets/54509462-3b59-4683-82fa-ef6fcb165c17" />
-
+<img width="1115" height="752" alt="db schema" src="https://github.com/user-attachments/assets/d5d858ca-2d79-4c2c-b892-a38343e95bfa" />
