@@ -79,6 +79,7 @@ Order_Items
 Authentication is implemented using JWT tokens.
 Passwords are securely hashed using bcrypt before storing in the database.
 
+<img width="1893" height="907" alt="register page" src="https://github.com/user-attachments/assets/add9f47d-40d6-40d6-b90c-5fce1ca7c91a" />
 <img width="1902" height="907" alt="login page1" src="https://github.com/user-attachments/assets/c28b44a6-fa3d-4963-8942-bb07a79fcb9a" />
 <img width="1898" height="908" alt="products page" src="https://github.com/user-attachments/assets/1fbe6489-b213-42e0-9595-490cc4ab6737" />
 <img width="1901" height="903" alt="products page2" src="https://github.com/user-attachments/assets/6904c4b0-d7f8-4401-91cf-93139011fbe4" />
